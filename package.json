@@ -1,0 +1,27 @@
+{
+  "name": "axosoft-github-updater",
+  "version": "1.0.0",
+  "description": "Github to Axosoft update tool",
+  "main": "src/main.ts",
+  "author": "Alex Garcia",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "ts-node src/main.ts"
+  },
+  "dependencies": {
+    "@octokit/rest": "^16.38.3",
+    "@types/express": "4.17.2",
+    "@types/lodash": "4.14.149",
+    "@types/node": "13.5.0",
+    "dotenv": "8.2.0",
+    "express": "4.17.1",
+    "lodash": "4.17.15",
+    "node-axosoft": "2.3.0",
+    "ts-node": "8.6.2",
+    "typescript": "3.7.5"
+  },
+  "devDependencies": {
+    "nodemon": "2.0.2"
+  }
+}
