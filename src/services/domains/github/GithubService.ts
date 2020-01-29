@@ -1,8 +1,10 @@
 import _ from 'lodash';
 import Octokit from '@octokit/rest';
+import AxosoftService from '../axosoft/AxosoftService'
 
 export default class GitHub {
-  octokit: Octokit;
+  private octokit: Octokit;
+
   constructor() {
     this.octokit = new Octokit({
       auth: process.env.GITHUB_ACCESS_TOKEN?.trim()
@@ -34,5 +36,9 @@ export default class GitHub {
     } catch (e) {
       console.error(e);
     }
+  }
+
+  public async workflowStepChange() {
+    // this.axosoft.updateFeature();
   }
 }
