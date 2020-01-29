@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import Octokit from '@octokit/rest';
-import AxosoftService from '../axosoft/AxosoftService'
 
 export default class GitHub {
   private octokit: Octokit;
