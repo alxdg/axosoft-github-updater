@@ -1,2 +1,2 @@
-export { default as Axosoft } from './Axosoft';
+export { default as AxosoftModels } from './AxosoftModels';
 export { default as AxosoftService } from './AxosoftService';
