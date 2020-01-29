@@ -4,12 +4,12 @@ import { WorkflowDetails, WorkflowStep } from './Axosoft';
 import GithubService from '../github/GithubService';
 
 export default class AxosoftService {
-  axosoftClient: any;
-  workflowSteps: WorkflowStep[] = [];
-  githubService: GithubService;
+  private axosoftClient: any;
+  private workflowSteps: WorkflowStep[] = [];
 
-  constructor() {
-    this.githubService = new GithubService();
+  constructor(
+    private githubService = new GithubService()
+  ) {
     this.axosoftClient = axosoft(process.env.AXOSOFT_BASE_URL?.trim(), {
       access_token: process.env.AXOSOFT_OAUTH_TOKEN?.trim()
     });
@@ -30,6 +30,10 @@ export default class AxosoftService {
 
     console.log(`Received message after workflow step change from ${workflowPrevStep!.name} to ${workflowNewStep!.name}`);
     this.githubService.updatePullRequestLabels('hack-server', workflowPrevStep!.name, [workflowNewStep!.name]);
+  }
+
+  public async updateFeature() {
+    throw new Error('Method not implemented.');
   }
 }
 
