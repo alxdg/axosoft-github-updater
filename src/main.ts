@@ -1,18 +1,17 @@
 require('dotenv').config();
 import _ from 'lodash';
-import express, { Router } from 'express';
-import * as controllers from './controllers';
+import express, { Response, Request } from 'express';
 
-console.log()
+// Local Deps
+import * as controllers from 'controllers';
 
 const app = express()
-const router = Router();
 
 app.use(express.json());
 
-app.get('/', function (req, res) {
+app.get('/', function (_req: Request, res: Response) {
   console.log('Got a message');
-  res.send('Hello World')
+  res.sendStatus(200)
 });
 
 // Add controllers to the api

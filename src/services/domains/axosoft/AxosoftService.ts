@@ -17,14 +17,14 @@ export default class AxosoftService {
     return workflow.workflow_steps;
   }
 
-  public async getWorkflowStepChanges(payload: WorkflowDetails, workflowSteps: WorkflowStep[]): Promise<{ original: WorkflowStep, change: WorkflowStep }> {
+  public async getWorkflowStepChanges(payload: WorkflowDetails, workflowSteps: WorkflowStep[]): Promise<{ original: WorkflowStep, changed: WorkflowStep }> {
     const workflowPrevStepId = payload.original.workflow_step.id;
     const workflowNewStepId = payload.changed.workflow_step.id;
 
     const original = _.find(workflowSteps, x => x.id === workflowPrevStepId)!;
-    const change = _.find(workflowSteps, x => x.id === workflowNewStepId)!;
+    const changed = _.find(workflowSteps, x => x.id === workflowNewStepId)!;
 
-    return { original, change }
+    return { original, changed }
   }
 
   public async updateFeature() {

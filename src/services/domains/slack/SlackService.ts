@@ -16,7 +16,7 @@ export default class SlackService {
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: `The has been a change in the workflow step for feature ${payload.original.id}`
+          text: `There has been a workflow step change for feature ${payload.original.id}`
         }
       }, {
         type: 'section',
