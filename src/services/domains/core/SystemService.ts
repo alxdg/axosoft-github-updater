@@ -24,7 +24,7 @@ export default class SystemService {
     this._githubService.updatePullRequestLabels('axosoft-gihub-updater', payload, original, changed);
 
     console.log('Notifiying Slack');
-    this._slackService.notify(payload);
+    this._slackService.notify(payload, original, changed);
   }
 
   public async updateAxosoftWorkflowStep(payload: any) {

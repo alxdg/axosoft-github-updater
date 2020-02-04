@@ -1,6 +1,6 @@
+import moment from 'moment';
 import { WebClient } from '@slack/web-api';
-import { WorkflowDetails } from '../axosoft/AxosoftModels';
-
+import { WorkflowDetails, WorkflowStep } from '../axosoft/AxosoftModels';
 
 export default class SlackService {
   constructor(
@@ -8,7 +8,7 @@ export default class SlackService {
   ) { }
 
 
-  public async notify(payload: WorkflowDetails) {
+  public async notify(payload: WorkflowDetails, original: WorkflowStep, changed: WorkflowStep) {
     this._webClient.chat.postMessage({
       channel: '#axosoft-integration',
       text: 'Axosoft Feature Update',
@@ -16,21 +16,23 @@ export default class SlackService {
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: `There has been a workflow step change for feature ${payload.original.id}`
+          text: `*Workflow Step Change for Feature ${payload.original.id}*\n${payload.original.name}`
         }
       }, {
         type: 'section',
         fields: [{
           type: 'mrkdwn',
-          text: `*Description*\n${payload.original.name}`
-        },{
+          text: `*From Step:*\n${original.name}`
+        }, {
           type: 'mrkdwn',
-          text: `*Type:*\n${payload.original.item_type}`
-        }],
-        text: {
+          text: `*To Step:*\n${changed.name}`
+        }, {
           type: 'mrkdwn',
-          text: `*Last Update*\n${payload.changed.last_updated_date_time}`
-        }
+          text: `*Last Update:*\n${moment(payload.changed.last_updated_date_time).format('llll')}`
+        }, {
+          type: 'mrkdwn',
+          text: `*User:*\n${payload.user.first_name} ${payload.user.last_name}`
+        }]
       }]
     })
   }
