@@ -48,11 +48,6 @@ export default class SystemService {
             await this._axosoftService.updateFeatureLabels(featureNumber, labels);
           }
           break;
-
-        case 'edited':
-
-          break;
-
         default:
           console.log('Unhandled action sent by Github', payload.action);
       }
