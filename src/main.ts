@@ -1,6 +1,7 @@
 require('dotenv').config();
 import _ from 'lodash';
 import express, { Response, Request } from 'express';
+import morgan from 'morgan';
 
 // Local Deps
 import * as controllers from 'controllers';
@@ -8,6 +9,7 @@ import * as controllers from 'controllers';
 const app = express()
 
 app.use(express.json());
+app.use(morgan('dev')); // Set logging to dev format
 
 app.get('/', function (_req: Request, res: Response) {
   console.log('Got a message');

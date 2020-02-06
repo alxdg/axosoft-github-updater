@@ -17,7 +17,9 @@ export default class AxosoftController {
 
   private async workflowChange({ body }: Request, res: Response) {
     try {
-      await this.service.updateGithubLabel(body);
+      console.log('Message received from Axosoft');
+      
+      await this.service.processAxosoftWebhook(body);
       res.sendStatus(204);
     } catch (e) {
       res.sendStatus(500);

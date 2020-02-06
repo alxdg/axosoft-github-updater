@@ -18,7 +18,8 @@ export default class GithubController {
 
   private async webhook({ body }: Request, res: Response) {
     try {
-      await this.service.updateAxosoftWorkflowStep(body);
+      console.log('Received message from github.')
+      await this.service.processGithubWebhook(body);
       res.sendStatus(204);
     } catch (e) {
       res.sendStatus(500);

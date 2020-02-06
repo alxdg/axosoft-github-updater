@@ -7,20 +7,23 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "debug": "nodemon -r tsconfig-paths/register src/main.ts",
-    "start": "nodemon -r tsconfig-paths/register"
+    "debug": "nodemon --inspect src/main.ts",
+    "start": "nodemon src/main.ts"
   },
   "dependencies": {
-    "@octokit/rest": "16.43.0",
+    "@octokit/rest": "16.43.1",
+    "@octokit/webhooks": "7.0.0",
     "@slack/events-api": "2.3.1",
     "@slack/web-api": "5.7.0",
     "@types/express": "4.17.2",
     "@types/lodash": "4.14.149",
+    "@types/morgan": "1.7.37",
     "@types/node": "13.7.0",
     "dotenv": "8.2.0",
     "express": "4.17.1",
     "lodash": "4.17.15",
     "moment": "2.24.0",
+    "morgan": "1.9.1",
     "node-axosoft": "2.3.0",
     "ts-node": "8.6.2",
     "typescript": "3.7.5"
@@ -40,7 +43,7 @@
       ".git"
     ],
     "execMap": {
-      "ts": "ts-node"
+      "ts": "node -r ts-node/register -r tsconfig-paths/register"
     },
     "env": {
       "NODE_ENV": "development"

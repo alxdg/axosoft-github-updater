@@ -3,16 +3,16 @@ import axosoft from 'node-axosoft/promise';
 import { WorkflowDetails, WorkflowStep } from './AxosoftModels';
 
 export default class AxosoftService {
-  private axosoftClient: any;
+  private _client: any;
 
   constructor() {
-    this.axosoftClient = axosoft(process.env.AXOSOFT_BASE_URL?.trim(), {
+    this._client = axosoft(process.env.AXOSOFT_BASE_URL?.trim(), {
       access_token: process.env.AXOSOFT_OAUTH_TOKEN?.trim()
     });
   }
 
   public async getWorkflowSteps(workflowName: string): Promise<WorkflowStep[]> {
-    const { data } = await this.axosoftClient.Workflows.get();
+    const { data } = await this._client.Workflows.get();
     const workflow = _.find(data, x => x.name === workflowName);
     return workflow.workflow_steps;
   }
@@ -27,8 +27,12 @@ export default class AxosoftService {
     return { original, changed }
   }
 
-  public async updateFeature() {
-    throw new Error('Method not implemented.');
+  public async updateFeatureLabels(featureNumber: string, labels: WorkflowStep[]) {
+    for (const label of labels) {
+      await this._client.Features.update(featureNumber, {
+        item: { workflow_step: { id: label.id } }
+      });
+    }
   }
 }
 

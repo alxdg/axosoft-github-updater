@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { WebClient } from '@slack/web-api';
+import { WebClient, WebAPICallResult } from '@slack/web-api';
 import { WorkflowDetails, WorkflowStep } from '../axosoft/AxosoftModels';
 
 export default class SlackService {
@@ -8,8 +8,8 @@ export default class SlackService {
   ) { }
 
 
-  public async notify(payload: WorkflowDetails, original: WorkflowStep, changed: WorkflowStep) {
-    this._webClient.chat.postMessage({
+  public async notify(payload: WorkflowDetails, original: WorkflowStep, changed: WorkflowStep): Promise<WebAPICallResult> {
+    return this._webClient.chat.postMessage({
       channel: '#axosoft-integration',
       text: 'Axosoft Feature Update',
       blocks: [{
