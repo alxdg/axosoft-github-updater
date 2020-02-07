@@ -52,7 +52,7 @@ export default class GitHub {
     }
   }
 
-  public getPullRequestNumber(pr: WebhookPayloadPullRequestPullRequest): string | null {
+  public getPullRequestFeatureNumber(pr: WebhookPayloadPullRequestPullRequest): string | null {
     const featureNumberRegex = /\d+/;
     return pr && featureNumberRegex.test(pr.title) ? pr.title.match(featureNumberRegex)![0] : null;
   }

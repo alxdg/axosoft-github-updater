@@ -9,10 +9,10 @@ import * as controllers from 'controllers';
 const app = express()
 
 app.use(express.json());
-app.use(morgan('dev')); // Set logging to dev format
+app.use(morgan('combined')); // Set logging to dev format
 
 app.get('/', function (_req: Request, res: Response) {
-  console.log('Got a message');
+  console.log('Logging healthcheck request.');
   res.sendStatus(200)
 });
 
