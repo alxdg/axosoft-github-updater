@@ -1,20 +1,15 @@
+const webpack = require('webpack');
 const path = require('path');
-const nodeExternals = require('webpack-node-externals');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
-const WebpackShellPlugin = require('webpack-shell-plugin');
 
-const {
-  NODE_ENV = 'production',
-} = process.env;
 module.exports = {
   entry: './src/main.ts',
-  mode: NODE_ENV,
+  mode: 'production',
   target: 'node',
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, '../dist'),
     filename: 'main.js'
   },
-  watch: NODE_ENV === 'development',
   module: {
     rules: [
       {
@@ -28,11 +23,7 @@ module.exports = {
   resolve: {
     plugins: [
       new TsconfigPathsPlugin({ configFile: "./tsconfig.json" }),
-      new WebpackShellPlugin({
-        onBuildEnd: ['yarn start:dev']
-      })
     ],
     extensions: ['.ts', '.js'],
-  },
-  externals: [nodeExternals()]
+  }
 }
