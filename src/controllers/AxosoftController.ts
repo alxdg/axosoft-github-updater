@@ -1,8 +1,8 @@
 import { Router, Request, Response } from 'express';
-import AxosoftService from '../services/domains/axosoft/AxosoftService';
+import { SystemService } from '../services/domains/core';
 
 export default class AxosoftController {
-  private service = new AxosoftService();
+  private service = new SystemService();
   public router = Router();
   public path = '/axosoft';
 
@@ -17,7 +17,9 @@ export default class AxosoftController {
 
   private async workflowChange({ body }: Request, res: Response) {
     try {
-      await this.service.workflowChange(body);
+      console.log('Message received from Axosoft');
+      
+      await this.service.processAxosoftWebhook(body);
       res.sendStatus(204);
     } catch (e) {
       res.sendStatus(500);
